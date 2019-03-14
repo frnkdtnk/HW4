@@ -5,13 +5,4 @@ var fs      = require('lowdb/adapters/FileSync');
 var adapter = new fs('db.json');
 var db      = low(adapter);
 db.defaults({ posts: [] }).write();
-var run = function(){
-    fetch(url)
-    .then(function(response){return response.json();})
-    .then(function(json){
-        db.get('posts')
-            .push(json)
-            .write();})
-}
-if ((db.get('posts').size.value())<240)
-{setInterval(run,15000);}
+console.log('number of posts:' + db.get('posts').length);
