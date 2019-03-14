@@ -6,4 +6,4 @@ var adapter = new fs('db.json');
 var db      = low(adapter);
 db.defaults({ posts: [] }).write();
 
-console.log('number of distinct posts:' + db.get('posts').distinct('ID').length);
+console.log('number of distinct posts:' + db.get('posts').size().value());
