@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<script>
+var fetch = require('node-fetch');
+var low     = require('lowdb');
+var fs      = require('lowdb/adapters/FileSync');
+var adapter = new fs('db.json');
+var db      = low(adapter);
+db.defaults({ posts: [] }).write();
+console.log(db.get('posts').distinct('id')[0])
+</script>
+<body>
+<select>
+    <option value=db.get('posts').distinct('id')[0]>db.get('posts').distinct('id')[0]</option>
+    <option value=db.get('posts').distinct('id')[1]>db.get('posts').distinct('id')[1]</option>
+    <option value=db.get('posts').distinct('id')[2]>db.get('posts').distinct('id')[2]</option>
+    <option value=db.get('posts').distinct('id')[3]>db.get('posts').distinct('id')[3]</option>
+    <option value=db.get('posts').distinct('id')[4]>db.get('posts').distinct('id')[4]</option>
+    <option value=db.get('posts').distinct('id')[5]>db.get('posts').distinct('id')[5]</option>
+    <option value=db.get('posts').distinct('id')[6]>db.get('posts').distinct('id')[6]</option>
+    <option value=db.get('posts').distinct('id')[7]>db.get('posts').distinct('id')[7]</option>
+</select>
+
+</body>
+</html>

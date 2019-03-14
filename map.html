@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<script src="http://maps.google.com/maps/api/js?key=AIzaSyARxs_0QWBQzZ-7tnFIkcz6Tzh5Fr1I0xg"></script>
+<div id="map" style="width:1024px; height:768px"></div>
+<script>
+var map;
+var markers = [];
+// load map
+function init(){
+	var myOptions = {
+		zoom      : 14,
+		center    : {lat:42.353350,lng:-71.091525},
+		mapTypeId : google.maps.MapTypeId.ROADMAP
+	};
+	var element = document.getElementById('map');
+  	map = new google.maps.Map(element, myOptions);
+  	addMarkers();
+};
+
+async function addMarkers(){
+	var buses = db.get('posts').distinct('id')[0];
+    buses.forEach(function(bus){
+		var mark = getMarker(bus.id);
+		if(mark == null){
+			addMarker(bus);
+		}
+		else{
+			moveMarker(mark,bus);
+		};
+	});
+			
+	
+}
+
+function addMarker(bus){
+	
+	var marker = new google.maps.Marker({
+	    position: {
+	    	lat: bus.attributes.latitude, 
+	    	lng: bus.attributes.longitude
+	    },
+	    map: map,
+	    icon: 'red.png',
+	    id: bus.id
+	});
+	markers.push(marker);
+}
+
+function getMarker(id){
+	var marker = markers.find(function(item){
+		return item.id === id;
+	});
+	return marker;
+}
+window.onload = init;
+</script>
+</html>
